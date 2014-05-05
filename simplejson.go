@@ -37,19 +37,19 @@ func (j *Json) MarshalJSON() ([]byte, error) {
 }
 
 // EncodeIndent returns its marshaled data indented as `[]byte`
-// this method takes the same parameters as the json.MarshalIndent method 
-func (j * Json) EncodeIndent(prefix string, indent string) ([]byte, error){
+// this method takes the same parameters as the json.MarshalIndent method
+func (j *Json) EncodeIndent(prefix string, indent string) ([]byte, error) {
 	return json.MarshalIndent(&j.data, prefix, indent)
 }
 
 // Set modifies `Json` map by `key` and `value`
 // Useful for changing single key/value in a `Json` object easily.
 func (j *Json) Set(key string, val interface{}) {
-	switch val.(type){
-	case Json: 
+	switch val.(type) {
+	case Json:
 		val = val.(Json).data
 	default:
-        }
+	}
 	m, err := j.Map()
 	if err != nil {
 		return
@@ -134,7 +134,7 @@ func (j *Json) Map() (map[string]interface{}, error) {
 	return nil, errors.New("type assertion to map[string]interface{} failed")
 }
 
-func (j *Json) Interface() interface{}{
+func (j *Json) Interface() interface{} {
 	return j.data
 }
 
